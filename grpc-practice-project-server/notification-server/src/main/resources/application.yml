@@ -1,0 +1,10 @@
+grpc:
+  server:  # Configuration for gRPC server
+    port: 9090  # Port on which the gRPC server will listen for incoming requests
+
+
+#grpc: Top-level key for gRPC related configurations.
+
+#server: Configuration for gRPC server.
+
+#port: Port on which the gRPC server will listen for incoming requests. Here, it is set to 9090.

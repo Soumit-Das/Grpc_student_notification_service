@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package com.grpcpractice;
+
+// Request message for getting notification details by ID
+message NotificationRequest {
+  int32 notification_id = 1;
+}
+
+// Response message for notification details including student name
+message NotificationResponse {
+  int32 notification_id = 1;
+  string student_name = 2;
+}
+
+// Request message for getting notifications pagewise
+message PaginationRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+// Response message representing an address
+message AddressResponse {
+  string city = 1;
+  int32 pincode = 2;
+}
+
+// Message representing a student with their details and addresses
+message Student {
+  int32 student_id = 1;
+  string name = 2;
+  int32 age = 3;
+  string batch = 4;
+  AddressResponseList addresses = 5;
+  // Add other fields as needed
+}
+
+// Message representing a list of address responses
+message AddressResponseList {
+  repeated AddressResponse address = 1;
+}
+
+// Message representing a notification with its details and the student payload
+message Notification {
+  int32 notification_id = 1;
+  string notification_type = 2;
+  Student payload = 3;
+  string created_on = 4; // Assuming this will be represented as a string in the proto
+  // Add other fields as needed
+}
+
+// Response message for paginated notifications
+message PaginationResponse {
+  repeated Notification notifications = 1;
+}
+
+// gRPC service for handling student notifications
+service StudentNotificationService {
+  // RPC method for getting notification details by ID
+  rpc getNotificationDetailsById(NotificationRequest) returns (NotificationResponse) {}
+  // RPC method for getting notifications pagewise
+  rpc getNotificationsPagewise(PaginationRequest) returns (PaginationResponse) {}
+}
+
+
+/*
+
+Protocol Buffers, also known as protobuf, is a method for serializing structured data. It is used to define the structure of your data in a simple and language-neutral way, allowing you to easily serialize and deserialize data in your applications. Here's a breakdown of the proto file and its purpose:
+
+syntax = "proto3";: Specifies that this proto file is using version 3 of the Protocol Buffers syntax.
+
+option java_multiple_files = true;: Specifies that each message will be generated into its own Java file when the code is generated from this proto file.
+
+package com.grpcpractice;: Specifies the Java package for the generated code.
+
+message: Defines a data structure or message with named fields. Each field has a unique number used for identification when serialized.
+
+repeated: Indicates a field that can have zero or more values, similar to a list or array.
+
+service: Defines a service with RPC (Remote Procedure Call) methods that can be called by clients.
+
+ */

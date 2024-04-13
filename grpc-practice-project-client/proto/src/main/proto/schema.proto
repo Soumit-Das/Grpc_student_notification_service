@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package com.grpcpractice;
+
+message NotificationRequest{
+  int32 notification_id = 1;
+}
+
+message NotificationResponse{
+  int32 notification_id = 1;
+  string student_name = 2;
+}
+
+message PaginationRequest {
+  int32 page_number = 1;
+  int32 page_size = 2;
+}
+
+message AddressResponse {
+  string city = 1;
+  int32 pincode = 2;
+}
+
+message Student {
+  int32 student_id = 1;
+  string name = 2;
+  int32 age = 3;
+  string batch = 4;
+  AddressResponseList addresses = 5;
+  // Add other fields as needed
+}
+
+message AddressResponseList
+{
+  repeated AddressResponse address = 1;
+}
+
+message Notification {
+  int32 notification_id = 1;
+  string notification_type = 2;
+  Student payload = 3;
+  string created_on = 4; // Assuming this will be represented as a string in the proto
+  // Add other fields as needed
+}
+
+message PaginationResponse {
+  repeated Notification notifications = 1;
+}
+
+
+service StudentNotificationService{
+  rpc getNotificationDetailsById(NotificationRequest) returns (NotificationResponse) {}
+  rpc getNotificationsPagewise(PaginationRequest) returns (PaginationResponse) {}
+}

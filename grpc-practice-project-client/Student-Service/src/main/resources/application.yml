@@ -1,0 +1,16 @@
+grpc:
+  client:  # Configuration for gRPC client
+    grpc-studentnotification-service:  # Unique identifier for the gRPC client
+      address: static://localhost:9090  # Server address to connect to (localhost:9090 in this case)
+      negotiationType: plaintext  # Communication negotiation type (plaintext in this case)
+
+
+#grpc: Top-level key for gRPC related configurations.
+
+#client: Configuration for gRPC client.
+
+#grpc-studentnotification-service: Unique identifier for the gRPC client, used to reference this client configuration.
+
+#address: Server address to connect to. Here, it is set to static://localhost:9090, indicating that the server is located at localhost on port 9090.
+
+#negotiationType: Communication negotiation type. In this case, it is set to plaintext, indicating that communication with the server will be unencrypted.
